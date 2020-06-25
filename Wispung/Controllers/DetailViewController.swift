@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class DetailViewController: UIViewController {
 
@@ -15,30 +16,42 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var timeOperationPlace: UILabel!
     @IBOutlet weak var photoPlace: UIImageView!
     @IBOutlet weak var descPlace: UILabel!
+    @IBOutlet weak var buttonMap: UIButton!
     
-    var place: Place?
+    var place: Place!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Detail"
-        if let result = place {
-            namePlace.text = result.name
-            locationPlace.text = result.location
-            timeOperationPlace.text = result.operatingHours
-            photoPlace.image = result.photo
-            descPlace.text = result.description
-        }
+        buttonMap.layer.cornerRadius = 4
+        
+        namePlace.text = place.name
+        locationPlace.text = place.location
+        timeOperationPlace.text = place.operatingHours
+        photoPlace.image = place.photo
+        descPlace.text = place.description
+
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func buttonMapTapped(_ sender: UIButton) {
+        openMapForPlace()
     }
-    */
+    
+    func openMapForPlace() {
+        let latitude: CLLocationDegrees = place!.lat
+        let longitude: CLLocationDegrees = place!.long
 
+        let regionDistance: CLLocationDistance = 10000
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+        ]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        
+        mapItem.name = place.name
+        mapItem.openInMaps(launchOptions: options)
+    }
 }
