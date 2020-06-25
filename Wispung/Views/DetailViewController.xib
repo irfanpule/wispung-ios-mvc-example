@@ -24,6 +24,7 @@
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QGJ-9u-SqN">
                     <rect key="frame" x="0.0" y="44" width="414" height="233"/>
+                    <color key="backgroundColor" red="0.47843137250000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="QGJ-9u-SqN" secondAttribute="height" multiplier="16:9" id="Sbe-4i-E9S"/>
                     </constraints>

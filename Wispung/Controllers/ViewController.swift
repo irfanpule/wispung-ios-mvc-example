@@ -16,14 +16,21 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        self.title = "Wispung"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Wispung"
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "PlaceTableViewCell", bundle: nil), forCellReuseIdentifier: "PlaceCell")
+        
+        let profileButton = UIBarButtonItem(image: UIImage(systemName: "person.crop.circle"), style: .plain, target: self, action: #selector(profileTapped))
+        navigationItem.rightBarButtonItem = profileButton
     }
-
+    
+    @objc func profileTapped() {
+        let controller = ProfileViewController(nibName: "ProfileViewController", bundle: nil)
+        navigationController?.pushViewController(controller, animated: true)
+    }
 
 }
 

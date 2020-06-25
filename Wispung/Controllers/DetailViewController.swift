@@ -20,7 +20,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "Detail"
         if let result = place {
             namePlace.text = result.name
             locationPlace.text = result.location
