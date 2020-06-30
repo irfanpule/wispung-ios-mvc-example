@@ -27,6 +27,13 @@ class ViewController: UIViewController {
         navigationItem.rightBarButtonItem = profileButton
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let index = self.tableView.indexPathForSelectedRow{
+            self.tableView.deselectRow(at: index, animated: true)
+        }
+    }
+
     @objc func profileTapped() {
         let controller = ProfileViewController(nibName: "ProfileViewController", bundle: nil)
         navigationController?.pushViewController(controller, animated: true)
